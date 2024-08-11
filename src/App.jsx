@@ -9,7 +9,7 @@ function App() {
       MelodyMeme
     </h1>
 <CustomEditor />
-      {/* <TestApi /> */}
+      <TestApi />
 </div>  )
 }
 

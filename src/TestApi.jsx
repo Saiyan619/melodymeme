@@ -1,48 +1,83 @@
-import React from 'react'
-import { useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import sanitizeHtml from 'sanitize-html';
 
-const TestApi = () => {
+function TestApi() {
+  const [artist, setArtist] = useState('');
+  const [title, setTitle] = useState('');
+  const [lyrics, setLyrics] = useState('');
+  const [error, setError] = useState(null);
+  const [Releases, setReleases] = useState('')
+
+  const fetchLyrics = async () => {
+    try {
+      const response = await fetch(`https://api.lyrics.ovh/v1/${artist}/${title}`);
+      const data = await response.json();
+      if (response.ok) {
+        // Sanitize and replace newlines with <br> tags
+        const sanitizedLyrics = sanitizeHtml(data.lyrics).replace(/\n/g, '<br/>');
+        setLyrics(sanitizedLyrics);
+      } else {
+        setError('Failed to fetch lyrics');
+      }
+    } catch (err) {
+      setError('An error occurred while fetching lyrics');
+    }
+  };
+
     useEffect(() => {
-        const fetchToken = async () => {
-          const clientId = 'd46219bf9b64425bbbcadb415d889176'; // Replace with your actual client ID
-          const clientSecret = '34410039424e44928aa70c022a7bb6f0'; // Replace with your actual client secret
+      const fetchReleases = async () => {
+        const artistId = 'your-artist-id';  // Replace with the actual artist ID
+        const url = `https://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd`; // Correct URL
     
-          try {
-            const response = await fetch('https://accounts.spotify.com/api/token', {
-                method: 'POST',
-                body: new URLSearchParams({
-                  'grant_type': 'client_credentials',
-                  'client_id': 'd46219bf9b64425bbbcadb415d889176', // Replace with your actual client ID
-                  'client_secret': 'd46219bf9b64425bbbcadb415d889176' // Replace with your actual client secret
-                }),
-                headers: {
-                  'Content-Type': 'application/x-www-form-urlencoded'
-                }
-              });
-      
-              if (!response.ok) {
-                throw new Error('Failed to fetch token');
-              }
-      
-              const data = await response.json();
-              setToken(data.access_token);
-          } catch (error) {
-            console.error('Error fetching token:', error);
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Error: ${response.status}`);
           }
-        };
+          const data = await response.json();
+          setReleases(data);  
+          console.log(data);
+        } catch (err) {
+          console.log(err);
+        }
+      };
     
-        fetchToken();
-      }, []);
+      fetchReleases();
+    }, []);  
     
+
+
 
   return (
-      <div>
-             <div>
-      <h1>Spotify Access Token</h1>
-      {/* {token ? <p>Token: {token}</p> : <p>Loading...</p>} */}
+    <div>
+      <input
+        type="text"
+        value={artist}
+        onChange={(e) => setArtist(e.target.value)}
+        placeholder="Enter artist name"
+        className="border p-2"
+      />
+      <input
+        type="text"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+        placeholder="Enter song title"
+        className="border p-2 ml-2"
+      />
+      <button onClick={fetchLyrics} className="bg-blue-500 text-white p-2 ml-2">
+        Fetch Lyrics
+      </button>
+
+      {error ? (
+        <p className="text-red-500 mt-4">{error}</p>
+      ) : (
+        <div
+          className="mt-4"
+          dangerouslySetInnerHTML={{ __html: lyrics }}
+        />
+      )}
     </div>
-    </div>
-  )
+  );
 }
 
-export default TestApi
+export default TestApi;
