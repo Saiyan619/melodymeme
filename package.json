@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "axios": "^1.7.3",
     "downloadjs": "^1.4.7",
     "html-to-image": "^1.11.11",
     "primereact": "^10.8.2",

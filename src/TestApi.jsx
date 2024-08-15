@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import sanitizeHtml from 'sanitize-html';
+import axios from 'axios';
 
 function TestApi() {
   const [artist, setArtist] = useState('');
@@ -24,28 +25,89 @@ function TestApi() {
     }
   };
 
-    useEffect(() => {
-      const fetchReleases = async () => {
-        const artistId = 'your-artist-id';  // Replace with the actual artist ID
-        const url = `https://coverartarchive.org/release/76df3287-6cda-33eb-8e9a-044b5e15ffdd`; // Correct URL
+    // useEffect(() => {
+    //   const fetchReleases = async () => {
+    //     const artistId = 'your-artist-id';  // Replace with the actual artist ID
+    //     const url = `https://coverartarchive.org/release/foo/135741621.jpg`; // Correct URL
     
-        try {
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Error: ${response.status}`);
+    //     try {
+    //       const response = await fetch(url);
+    //       if (!response.ok) {
+    //         throw new Error(`Error: ${response.status}`);
+    //       }
+    //       const data = await response.json();
+    //       setReleases(data);  
+    //       console.log(data);
+    //       // console.log(data.images[5].image);
+    //     } catch (err) {
+    //       console.log(err);
+    //     }
+    //   }; 
+    
+    //   fetchReleases();
+    // }, []);  
+    
+
+//  useEffect(() => {
+//       const fetchReleases = async () => {
+//         const options = {
+//           method: 'GET',
+//           url: 'https://songstats.p.rapidapi.com/artists/info',
+//           params: {
+//             spotify_artist_id: '2h93pZq0e7k5yf4dywlkpM',
+//             songstats_artist_id: 'vxk62ige'
+//           },
+//           headers: {
+//             'x-rapidapi-key': 'e1d4ad1b02msh79264ed2c9d1a2ap158e6fjsnaa39898192da',
+//             'x-rapidapi-host': 'songstats.p.rapidapi.com'
+//           }
+//         };
+        
+//         try {
+//           const response = await axios.request(options);
+//           console.log(response.data);
+//         } catch (error) {
+//           console.error(error);
+//         }
+//       }; 
+    
+//       fetchReleases();
+//  }, []);
+  
+  
+  useEffect(() => {
+      const fetchSongs = async () => {
+
+        const options = {
+          method: 'GET',
+          url: 'https://shazam.p.rapidapi.com/search',
+          params: {
+            term: 'look what you made me do',
+            locale: 'en-US',
+            offset: '0',
+            limit: '5'
+          },
+          headers: {
+            'x-rapidapi-key': 'e1d4ad1b02msh79264ed2c9d1a2ap158e6fjsnaa39898192da',
+            'x-rapidapi-host': 'shazam.p.rapidapi.com'
           }
-          const data = await response.json();
-          setReleases(data);  
-          console.log(data);
-        } catch (err) {
-          console.log(err);
+        };
+        
+        try {
+          const response = await axios.request(options);
+          // setReleases()
+          console.log(response.data.tracks.hits[0].track.images.coverart);
+        } catch (error) {
+          console.error(error);
         }
-      };
+          }
     
-      fetchReleases();
+        fetchSongs();
     }, []);  
     
 
+  
+  
 
 
   return (
