@@ -1,16 +1,16 @@
 import './App.css'
+import { Context, MainContext } from './Context'
 import CustomEditor from './CustomEditor'
+import MelodyMeme from './MelodyMeme'
 import TestApi from './TestApi'
 
 function App() {
+  // const {fetchSongs} = MainContext()
   return (
-    <div className='p-4'>
-     <h1 className="text-3xl font-bold underline">
-      MelodyMeme
-    </h1>
-<CustomEditor />
-      <TestApi />
-</div>  )
+    <Context>
+      <MelodyMeme />
+           </Context>
+  )
 }
 
 export default App

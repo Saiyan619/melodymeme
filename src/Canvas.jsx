@@ -2,8 +2,10 @@ import React from 'react';
 import { useRef } from 'react';
 import { toPng } from 'html-to-image';
 import download from 'downloadjs';
+import { MainContext } from './Context';
 
-function Canvas({ html }) {
+function Canvas({ html, musicName, artistName }) {
+  const { Releases } = MainContext();
       const templateRef = useRef(null);
 
       const downloadImage = async () => {
@@ -26,12 +28,13 @@ function Canvas({ html }) {
                             {/* <span className='text-white'>hey</span> */}
                             <div className='flex items-center gap-2'>
                                   <div>
-                                        <img className='w-14 rounded-md' src="./d3ea8798-afe2-4d69-a7a9-f8626c2cb6c9.jpeg" alt="music cover" />
+                                        {/* <img className='w-14 rounded-md' src="./d3ea8798-afe2-4d69-a7a9-f8626c2cb6c9.jpeg" alt="music cover" /> */}
+                                        <img className='w-12 rounded-xl' src={Releases} alt="music cover" />
                                   </div>
 
                                   <div className='flex flex-col'>
-                                        <span className='font-bold capitalize'>Delicate</span>
-                                        <span className='capitalize text-sm'>Taylor swift</span>
+                                        <span className='font-bold capitalize'>{musicName}</span>
+                <span className='capitalize text-sm'> {artistName}</span>
                                         </div>
                             </div>
 
