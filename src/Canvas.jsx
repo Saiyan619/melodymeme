@@ -50,7 +50,7 @@ function Canvas({ html, musicName, artistName }) {
                     
                 </div>
                 <button onClick={downloadImage} className="mt-4 bg-blue-500 text-white px-4 py-2 rounded" >
-        Download as Image
+        Download as an Image
       </button>
             </div>
   );
