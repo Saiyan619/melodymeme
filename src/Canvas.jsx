@@ -33,17 +33,16 @@ function Canvas({ html, musicName, artistName }) {
                                   </div>
 
                                   <div className='flex flex-col'>
-                                        <span className='font-bold capitalize'>{musicName}</span>
-                <span className='capitalize text-sm'> {artistName}</span>
+                                        <span className='font-bold capitalize'>{musicName ? musicName : 'Add track'}</span>
+                <span className='capitalize text-sm'> {artistName ? artistName : 'Add Artist'}</span>
                                         </div>
                             </div>
 
                             
                             <div className='mt-10'>
                               
-                                  <h1 dangerouslySetInnerHTML={{ __html: html }} className='text-white text-lg font-bold'></h1>
-                                  </div>
-
+{              html ?                    <h1 dangerouslySetInnerHTML={{ __html: html }} className='text-white text-lg font-bold'></h1> : 'Add lyrics'
+}                                  </div>
                             <div>
                                   <img className='w-24 mt-10' src="./ClipartKey_3235742.png" alt="" />
                                   </div>
