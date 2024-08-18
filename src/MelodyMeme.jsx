@@ -6,7 +6,7 @@ import { MainContext } from './Context'
 const MelodyMeme = () => {
     const { fetchSongs } = MainContext();
   return (
-      <div>
+      <div className='p-4'>
           <CustomEditor />
           <TestApi />
        

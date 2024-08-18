@@ -22,7 +22,7 @@ function Canvas({ html, musicName, artistName }) {
       };
     return (
        
-    <div  className='text-white font-Gotham'>
+    <div  className='text-white font-Gotham mt-10'>
         <div ref={templateRef} className='bg-black h-screen relative'>
           <div className='p-4'>
               <div ref={templateRef} className='bg-gray-900 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 w-5/6 rounded-lg'>
