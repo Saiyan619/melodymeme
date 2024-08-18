@@ -1,6 +1,6 @@
 import React from 'react'
 import CustomEditor from './CustomEditor'
-import TestApi from './TestApi'
+import Lyrics from './Lyrics'
 import { MainContext } from './Context'
 
 const MelodyMeme = () => {
@@ -8,7 +8,7 @@ const MelodyMeme = () => {
   return (
       <div className='p-4'>
           <CustomEditor />
-          <TestApi />
+          <Lyrics />
        
         
     </div>
