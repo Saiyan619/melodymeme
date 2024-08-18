@@ -47,7 +47,7 @@ export default function CustomEditor() {
           className="input input-bordered w-full max-w-xs mt-4" />
 
         <button onClick={fetchSongs}  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded font-bold" >
-        Fetch Music Cover
+        Search Music Cover to add
         </button>
 
 

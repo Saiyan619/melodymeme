@@ -7,13 +7,8 @@ function TestApi() {
   const [title, setTitle] = useState('');
   const [lyrics, setLyrics] = useState('');
   const [error, setError] = useState(null);
-  const [trackCover, settrackCover] = useState('')
-  const [Releases, setReleases] = useState('')
 
-function handleTrackCover(e) {
-  settrackCover(e.target.value)
-  console.log(trackCover)
-}
+
 
   const fetchLyrics = async () => {
     try {
@@ -31,33 +26,7 @@ function handleTrackCover(e) {
     }
   };
 
-  const fetchSongs = async () => {
-
-    const options = {
-      method: 'GET',
-      url: 'https://shazam.p.rapidapi.com/search',
-      params: {
-        term: `${trackCover}`,
-        locale: 'en-US',
-        offset: '0',
-        limit: '5'
-      },
-      headers: {
-        'x-rapidapi-key': 'e1d4ad1b02msh79264ed2c9d1a2ap158e6fjsnaa39898192da',
-        'x-rapidapi-host': 'shazam.p.rapidapi.com'
-      }
-    };
-    
-    try {
-      const response = await axios.request(options);
-      // setReleases()
-      console.log(response.data.tracks.hits[0].track.images.coverart);
-      const coverart = response.data.tracks.hits[0].track.images.coverart;
-      setReleases(coverart)
-    } catch (error) {
-      console.error(error);
-    }
-}
+  
 
 
   
@@ -92,18 +61,6 @@ function handleTrackCover(e) {
         />
       )}
 
-      {/* <div>
-      <input
-        type="text"
-        onChange={handleTrackCover}
-        placeholder="Enter song name"
-        className="border p-2"
-      />
-      <button onClick={fetchSongs} className="bg-blue-500 text-white p-2 ml-2">
-        Fetch covver art
-        </button>
-
-      </div> */}
     </div>
   );
 }
