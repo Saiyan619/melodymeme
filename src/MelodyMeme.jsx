@@ -9,9 +9,8 @@ const MelodyMeme = () => {
       <div>
           <CustomEditor />
           <TestApi />
-          <button onClick={fetchSongs} className="bg-blue-500 text-white p-2 ml-2">
-        Fetch covver art
-        </button>
+       
+        
     </div>
   )
 }

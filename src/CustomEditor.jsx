@@ -48,9 +48,11 @@ export default function CustomEditor() {
         placeholder="Enter song name"
         className="border p-2"
       />
-      <button onClick={fetchSongs} className="bg-blue-500 text-white p-2 ml-2">
-        Fetch covver art
+
+        <button onClick={fetchSongs}  className="mt-4 bg-blue-500 text-white px-4 py-2 rounded font-bold" >
+        Fetch Music Cover
         </button>
+
 
       </div>
       </div>
